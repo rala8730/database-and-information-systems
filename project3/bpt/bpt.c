@@ -1,3 +1,4 @@
+//Rasmi Lamichhane project3
 /*
  *  bpt.c
  */
@@ -548,7 +549,8 @@ node * find_leaf( node * root, int key, bool verbose ) {
 		}
 		i = 0;
 		while (i < c->num_keys) {
-			if (key >= c->keys[i]) i++;
+		//changed here because key is less than == root then increase
+			if (key <= c->keys[i]) i++;
 			else break;
 		}
 		if (verbose)
@@ -668,7 +670,8 @@ node * insert_into_leaf( node * leaf, int key, record * pointer ) {
 	int i, insertion_point;
 
 	insertion_point = 0;
-	while (insertion_point < leaf->num_keys && leaf->keys[insertion_point] < key)
+	//changed here  because if inserted key is greater than key then increase the index
+	while (insertion_point < leaf->num_keys && leaf->keys[insertion_point] > key)
 		insertion_point++;
 
 	for (i = leaf->num_keys; i > insertion_point; i--) {
@@ -709,7 +712,8 @@ node * insert_into_leaf_after_splitting(node * root, node * leaf, int key, recor
 	}
 
 	insertion_index = 0;
-	while (insertion_index < order - 1 && leaf->keys[insertion_index] < key)
+	//changed here  because if inserted key is greater than key then increase the index
+	while (insertion_index < order - 1 && leaf->keys[insertion_index] > key)
 		insertion_index++;
 
 	for (i = 0, j = 0; i < leaf->num_keys; i++, j++) {
